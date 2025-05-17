@@ -239,7 +239,6 @@ GameObject:
   - component: {fileID: 327461062}
   - component: {fileID: 327461061}
   - component: {fileID: 327461060}
-  - component: {fileID: 327461059}
   - component: {fileID: 327461063}
   m_Layer: 0
   m_Name: JudgeArea
@@ -263,29 +262,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1626093107}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &327461059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327461057}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16712c19f04fd894390c8aa90d03ebd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerID: 2
-  inputControl: {fileID: 0}
-  objCollider: {fileID: 327461060}
-  defendOkOBJ: {fileID: 573750800}
-  defendFailOBJ: {fileID: 780540236}
-  OndefectSuccess:
-    m_PersistentCalls:
-      m_Calls: []
-  OndefectFail:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &327461060
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -400,6 +376,7 @@ GameObject:
   - component: {fileID: 356574610}
   - component: {fileID: 356574613}
   - component: {fileID: 356574614}
+  - component: {fileID: 356574615}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -532,6 +509,30 @@ MonoBehaviour:
   gameTurn: 1
   moveWay: 1
   attackTurn: 1
+--- !u!114 &356574615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356574609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16712c19f04fd894390c8aa90d03ebd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 2
+  inputControl: {fileID: 356574614}
+  objCollider: {fileID: 486731684}
+  defendOkOBJ: {fileID: 1916514380}
+  defendFailOBJ: {fileID: 606681062}
+  OndefectSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  OndefectFail:
+    m_PersistentCalls:
+      m_Calls: []
+  defendTurn: 2
 --- !u!1 &463261787
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +644,6 @@ GameObject:
   - component: {fileID: 486731686}
   - component: {fileID: 486731685}
   - component: {fileID: 486731684}
-  - component: {fileID: 486731687}
   m_Layer: 0
   m_Name: JudgeArea
   m_TagString: PlayerJudgeArea
@@ -740,29 +740,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486731682}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &486731687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 486731682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16712c19f04fd894390c8aa90d03ebd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerID: 1
-  inputControl: {fileID: 0}
-  objCollider: {fileID: 486731684}
-  defendOkOBJ: {fileID: 1916514380}
-  defendFailOBJ: {fileID: 606681062}
-  OndefectSuccess:
-    m_PersistentCalls:
-      m_Calls: []
-  OndefectFail:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &554626486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,6 +1655,7 @@ GameObject:
   - component: {fileID: 1626093108}
   - component: {fileID: 1626093109}
   - component: {fileID: 1626093110}
+  - component: {fileID: 1626093111}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -1827,6 +1805,30 @@ MonoBehaviour:
   gameTurn: 1
   moveWay: -1
   attackTurn: 2
+--- !u!114 &1626093111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626093104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16712c19f04fd894390c8aa90d03ebd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 2
+  inputControl: {fileID: 1626093110}
+  objCollider: {fileID: 327461060}
+  defendOkOBJ: {fileID: 573750800}
+  defendFailOBJ: {fileID: 780540236}
+  OndefectSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  OndefectFail:
+    m_PersistentCalls:
+      m_Calls: []
+  defendTurn: 1
 --- !u!1 &1712245108
 GameObject:
   m_ObjectHideFlags: 0

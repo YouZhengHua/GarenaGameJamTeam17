@@ -1,21 +1,22 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class DefendSystem : MonoBehaviour
 {
-    [SerializeField] int playerID = 1;
     [SerializeField] InputControl inputControl;
     [SerializeField] BoxCollider objCollider;
     [SerializeField] GameObject defendOkOBJ;
     [SerializeField] GameObject defendFailOBJ;
     [SerializeField] UnityEvent OndefectSuccess;
     [SerializeField] UnityEvent OndefectFail;
-
+    [SerializeField] private int defendTurn = 1;
     private bool _isDefend = false;
     private float _startDefendTime = 0f;
-    private int _judgeBeatIndex = 0; 
-
+    private int _judgeBeatIndex = 0;
+    private Transform judgeArea;
+    
     public void JudgeSuccess(bool isSuccess)
     {
         if (isSuccess)
@@ -32,7 +33,7 @@ public class DefendSystem : MonoBehaviour
     public void CheckJudge()
     {
        bool isSuccess = false ;
-       Collider[] hitCollider = Physics.OverlapBox(transform.position, new Vector3(2f, 4f, 1f));
+       Collider[] hitCollider = Physics.OverlapBox(judgeArea.position, new Vector3(2f, 4f, 1f));
        if (hitCollider.Length > 0)
        {
             for (int i = 0; i < hitCollider.Length; i++)
@@ -49,14 +50,47 @@ public class DefendSystem : MonoBehaviour
                 }
             }
        }
-        JudgeSuccess(isSuccess);
+       JudgeSuccess(isSuccess);
     }
     private void Start()
     {
-        objCollider = GetComponent<BoxCollider>();
+        judgeArea = this.transform.Find("JudgeArea");
+        objCollider = judgeArea.GetComponent<BoxCollider>();
         objCollider.enabled = true;
-
     }
+
+    private void OnUp(InputValue input)
+    {
+        if (inputControl.GetCurrentGameTurn() != defendTurn)
+            return;
+        _judgeBeatIndex = 0;
+        CheckJudge();
+    }
+    
+    private void OnDown(InputValue input)
+    {
+        if (inputControl.GetCurrentGameTurn() != defendTurn)
+            return;
+        _judgeBeatIndex = 1;
+        CheckJudge();
+    }
+    
+    private void OnLeft(InputValue input)
+    {
+        if (inputControl.GetCurrentGameTurn() != defendTurn)
+            return;
+        _judgeBeatIndex = 2;
+        CheckJudge();
+    }
+    
+    private void OnRight(InputValue input)
+    {
+        if (inputControl.GetCurrentGameTurn() != defendTurn)
+            return;
+        _judgeBeatIndex = 3;
+        CheckJudge();
+    }
+    
     private void Update()
     {
         if (_isDefend)
@@ -65,52 +99,6 @@ public class DefendSystem : MonoBehaviour
         }
         else
         {
-            if (inputControl.GetCurrentGameTurn() == 1 && playerID == 2)
-            {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    _judgeBeatIndex = 0;
-                    CheckJudge();
-                }
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    _judgeBeatIndex = 1;
-                    CheckJudge();
-                }
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    _judgeBeatIndex = 2;
-                    CheckJudge();
-                }
-                if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    _judgeBeatIndex = 3;
-                    CheckJudge();
-                }
-            }
-            if (inputControl.GetCurrentGameTurn() == 2 && playerID == 1)
-            {
-                if (Input.GetKeyDown(KeyCode.W))
-                {
-                    _judgeBeatIndex = 0;
-                    CheckJudge();
-                }
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                    _judgeBeatIndex = 1;
-                    CheckJudge();
-                }
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    _judgeBeatIndex = 2;
-                    CheckJudge();
-                }
-                if (Input.GetKeyDown(KeyCode.D))
-                {
-                    _judgeBeatIndex = 3;
-                    CheckJudge();
-                }
-            }
         }
     }
 }
