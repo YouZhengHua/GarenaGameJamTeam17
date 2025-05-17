@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5416ab55727ad34783388130b5a089b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHide: 0
+  isHide: 1
   hideSpeed: 10
 --- !u!225 &27529391
 CanvasGroup:
