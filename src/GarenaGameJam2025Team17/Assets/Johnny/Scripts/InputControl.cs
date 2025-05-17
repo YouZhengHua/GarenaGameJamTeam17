@@ -59,7 +59,7 @@ public class InputControl : MonoBehaviour
         CreateBeat(3);
     }
 
-    private void CreateBeat(int beatIndex)
+    public void CreateBeat(int beatIndex)
     {
         GameObject newBeat = Instantiate(playerShootBeatOBJ[beatIndex], new Vector3(playerAttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
         BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
