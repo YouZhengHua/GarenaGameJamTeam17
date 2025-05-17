@@ -9,6 +9,7 @@ TagManager:
   - BeatJudge
   - Player1Hit
   - Player2Hit
+  - EmptyBeat
   layers:
   - Default
   - TransparentFX
