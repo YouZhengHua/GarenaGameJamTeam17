@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - CinemachineTarget
+  - PlayerJudgeArea
+  - BeatJudge
+  - Player1Hit
+  - Player2Hit
   layers:
   - Default
   - TransparentFX
