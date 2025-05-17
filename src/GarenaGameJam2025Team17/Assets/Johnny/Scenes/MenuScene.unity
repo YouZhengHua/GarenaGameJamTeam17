@@ -270,13 +270,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327461057}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16712c19f04fd894390c8aa90d03ebd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 2
-  inputControl: {fileID: 2137239086}
+  inputControl: {fileID: 0}
   objCollider: {fileID: 327461060}
   defendOkOBJ: {fileID: 573750800}
   defendFailOBJ: {fileID: 780540236}
@@ -398,6 +398,8 @@ GameObject:
   - component: {fileID: 356574612}
   - component: {fileID: 356574611}
   - component: {fileID: 356574610}
+  - component: {fileID: 356574613}
+  - component: {fileID: 356574614}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -477,6 +479,59 @@ Transform:
   - {fileID: 1615179768}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &356574613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356574609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: QTE_Game_Player_1
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &356574614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356574609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd20843348dd7849a336f40690abac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShootBeatOBJ:
+  - {fileID: 5108445546800308807, guid: 1e274f304806e5245830d51ff1b9d6b4, type: 3}
+  - {fileID: 5108445546800308807, guid: e0983cb8623b6ae4eac427ca1349605b, type: 3}
+  - {fileID: 5108445546800308807, guid: 32b2079a034fa6542a01ce3f479d3e65, type: 3}
+  - {fileID: 5108445546800308807, guid: ae27c21c1bb6c4b4c9dd215888bd77fe, type: 3}
+  playerAttPositionX: -19
+  attackY: 2
+  playerAttack: 3
+  gameTurn: 1
+  moveWay: 1
+  attackTurn: 1
 --- !u!1 &463261787
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 1
-  inputControl: {fileID: 2137239086}
+  inputControl: {fileID: 0}
   objCollider: {fileID: 486731684}
   defendOkOBJ: {fileID: 1916514380}
   defendFailOBJ: {fileID: 606681062}
@@ -1299,7 +1354,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1151556109}
-  - {fileID: 2137239085}
   - {fileID: 554626489}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1622,6 +1676,8 @@ GameObject:
   - component: {fileID: 1626093106}
   - component: {fileID: 1626093105}
   - component: {fileID: 1626093108}
+  - component: {fileID: 1626093109}
+  - component: {fileID: 1626093110}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -1718,6 +1774,59 @@ MonoBehaviour:
   OnHitEffect:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1626093109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626093104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: QTE_Game_Player_2
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1626093110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626093104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd20843348dd7849a336f40690abac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShootBeatOBJ:
+  - {fileID: 5108445546800308807, guid: a99bcbbd7755f8441adc88615cce271a, type: 3}
+  - {fileID: 5108445546800308807, guid: 21fc2356487e8a24587882c1b7c20c33, type: 3}
+  - {fileID: 5108445546800308807, guid: 0f5b7ff8218677842b4c474b791363d9, type: 3}
+  - {fileID: 5108445546800308807, guid: 2a2d48b23885f8d48b8de63881b0d885, type: 3}
+  playerAttPositionX: 19
+  attackY: 2
+  playerAttack: 3
+  gameTurn: 1
+  moveWay: -1
+  attackTurn: 2
 --- !u!1 &1712245108
 GameObject:
   m_ObjectHideFlags: 0
@@ -2145,65 +2254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363928a90ef21ea44912204fc4663b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2137239084
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2137239085}
-  - component: {fileID: 2137239086}
-  m_Layer: 0
-  m_Name: InputEventControl
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2137239085
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137239084}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 848594335}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2137239086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137239084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bd20843348dd7849a336f40690abac6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1ShootBeatOBJ:
-  - {fileID: 5108445546800308807, guid: 1e274f304806e5245830d51ff1b9d6b4, type: 3}
-  - {fileID: 5108445546800308807, guid: e0983cb8623b6ae4eac427ca1349605b, type: 3}
-  - {fileID: 5108445546800308807, guid: 32b2079a034fa6542a01ce3f479d3e65, type: 3}
-  - {fileID: 5108445546800308807, guid: ae27c21c1bb6c4b4c9dd215888bd77fe, type: 3}
-  player2ShootBeatOBJ:
-  - {fileID: 5108445546800308807, guid: a99bcbbd7755f8441adc88615cce271a, type: 3}
-  - {fileID: 5108445546800308807, guid: 21fc2356487e8a24587882c1b7c20c33, type: 3}
-  - {fileID: 5108445546800308807, guid: 0f5b7ff8218677842b4c474b791363d9, type: 3}
-  - {fileID: 5108445546800308807, guid: 2a2d48b23885f8d48b8de63881b0d885, type: 3}
-  player1AttPositionX: -19
-  player2AttPositionX: 19
-  attackY: 2
-  player1Attack: 3
-  player2Attack: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

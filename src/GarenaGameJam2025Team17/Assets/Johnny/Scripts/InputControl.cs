@@ -1,17 +1,18 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 public class InputControl : MonoBehaviour
 {
-    [SerializeField] GameObject[] player1ShootBeatOBJ;
-    [SerializeField] GameObject[] player2ShootBeatOBJ;
-    [SerializeField] float player1AttPositionX = -19f;
-    [SerializeField] float player2AttPositionX = 19f;
+    [SerializeField] GameObject[] playerShootBeatOBJ; 
+    [SerializeField] float playerAttPositionX = -19f;
     [SerializeField] float attackY = 1f;
-    [SerializeField] float player1Attack = 3f;
-    [SerializeField] float player2Attack = 3f;
-    private int gameTurn = 1;
+    [SerializeField] float playerAttack = 3f;
+    [SerializeField] private int gameTurn = 1;
     private bool isAttack = false;
     private float _attackStartTime = 0f;
+    [SerializeField] private int moveWay = 1;
+
+    [SerializeField] private int attackTurn = 1;
 
     public int GetCurrentGameTurn() { return gameTurn; }
 
@@ -23,7 +24,50 @@ public class InputControl : MonoBehaviour
     private void Start()
     {
         GameSystem.BeatValue = 0f;
+        InputUser.PerformPairingWithDevice(Keyboard.current, this.GetComponent<PlayerInput>().user);
     }
+
+    private void OnUp(InputValue input)
+    {
+        if (gameTurn != attackTurn || !input.isPressed)
+            return;
+
+        CreateBeat(0);
+    }
+
+    private void OnDown(InputValue input)
+    {
+        if (gameTurn != attackTurn || !input.isPressed)
+            return;
+        
+        CreateBeat(1);
+    }
+
+    private void OnLeft(InputValue input)
+    {
+        if (gameTurn != attackTurn || !input.isPressed)
+            return;
+        
+        CreateBeat(2);
+    }
+    
+    private void OnRight(InputValue input)
+    {
+        if (gameTurn != attackTurn || !input.isPressed)
+            return;
+        
+        CreateBeat(3);
+    }
+
+    private void CreateBeat(int beatIndex)
+    {
+        GameObject newBeat = Instantiate(playerShootBeatOBJ[beatIndex], new Vector3(playerAttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
+        BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
+        beatMoveSystem.StartMoveBeat(moveWay, playerAttack);
+        _attackStartTime = Time.time;
+        isAttack = true;
+    }
+    
     private void Update()
     {
         if (isAttack)
@@ -32,82 +76,6 @@ public class InputControl : MonoBehaviour
         }
         else
         {
-            if (gameTurn == 1)
-            {
-                if (Input.GetKeyDown(KeyCode.W))
-                {
-                    GameObject newBeat = Instantiate(player1ShootBeatOBJ[0], new Vector3(player1AttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-                    BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-                    beatMoveSystem.StartMoveBeat(1, player1Attack);
-                    _attackStartTime = Time.time;
-                    isAttack = true;
-                }
-                
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                    GameObject newBeat = Instantiate(player1ShootBeatOBJ[1], new Vector3(player1AttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-                    BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-                    beatMoveSystem.StartMoveBeat(1, player1Attack);
-                    _attackStartTime = Time.time;
-                    isAttack = true;
-                }
-                
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    GameObject newBeat = Instantiate(player1ShootBeatOBJ[2], new Vector3(player1AttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-                    BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-                    beatMoveSystem.StartMoveBeat(1, player1Attack);
-                    _attackStartTime = Time.time;
-                    isAttack = true;
-                }
-                
-                if (Input.GetKeyDown(KeyCode.D))
-                {
-                    GameObject newBeat = Instantiate(player1ShootBeatOBJ[3], new Vector3(player1AttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-                    BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-                    beatMoveSystem.StartMoveBeat(1, player1Attack);
-                    _attackStartTime = Time.time;
-                    isAttack = true;
-                }
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    GameObject newBeat = Instantiate(player2ShootBeatOBJ[0], new Vector3(player2AttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-                    BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-                    beatMoveSystem.StartMoveBeat(-1, player2Attack);
-                    _attackStartTime = Time.time;
-                    isAttack = true;
-                }
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    GameObject newBeat = Instantiate(player2ShootBeatOBJ[1], new Vector3(player2AttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-                    BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-                    beatMoveSystem.StartMoveBeat(-1, player2Attack);
-                    _attackStartTime = Time.time;
-                    isAttack = true;
-                }
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    GameObject newBeat = Instantiate(player2ShootBeatOBJ[2], new Vector3(player2AttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-                    BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-                    beatMoveSystem.StartMoveBeat(-1, player2Attack);
-                    _attackStartTime = Time.time;
-                    isAttack = true;
-                }
-                if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    GameObject newBeat = Instantiate(player2ShootBeatOBJ[3], new Vector3(player2AttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-                    BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-                    beatMoveSystem.StartMoveBeat(-1, player2Attack);
-                    _attackStartTime = Time.time;
-                    isAttack = true;
-                }
-
-            }
         }
-
     }
-
 }
