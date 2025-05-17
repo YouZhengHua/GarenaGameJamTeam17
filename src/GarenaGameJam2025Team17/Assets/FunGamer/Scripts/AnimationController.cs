@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.Serialization;
@@ -8,10 +9,6 @@ using UnityEngine.InputSystem;
 public class AnimationController : MonoBehaviour
 {
     private Animator _animator;
-    public bool up = false;
-    public bool down = false;
-    public bool left = false;
-    public bool right = false;
     [SerializeField] private float delayTime = 0f;
     private PlayerInput _playerInput;
     private void Awake()
@@ -28,30 +25,22 @@ public class AnimationController : MonoBehaviour
 #if ENABLE_INPUT_SYSTEM
     public void OnUp(InputValue input)
     {
-        up = input.isPressed;
-        _animator.SetBool("Up", up);
-        Invoke("AutoFalse", delayTime);
+        _animator.SetTrigger("Up");
     }
     
     public void OnDown(InputValue input)
     {
-        down = input.isPressed;
-        _animator.SetBool("Down", down);
-        Invoke("AutoFalse", delayTime);
+        _animator.SetTrigger("Down");
     }
     
     public void OnLeft(InputValue input)
     {
-        left = input.isPressed;
-        _animator.SetBool("Left", left);
-        Invoke("AutoFalse", delayTime);
+        _animator.SetTrigger("Left");
     }
     
     public void OnRight(InputValue input)
     {
-        right = input.isPressed;
-        _animator.SetBool("Right", right);
-        Invoke("AutoFalse", delayTime);
+        _animator.SetTrigger("Right");
     }
     #endif
 
@@ -63,17 +52,5 @@ public class AnimationController : MonoBehaviour
     private void OnLand(AnimationEvent animationEvent)
     {
         
-    }
-
-    private void AutoFalse()
-    {
-        up = false;
-        down = false;
-        left = false;
-        right = false;        
-        _animator.SetBool("Up", up);
-        _animator.SetBool("Down", down);
-        _animator.SetBool("Left", left);
-        _animator.SetBool("Right", right);
     }
 }

@@ -6,6 +6,9 @@ using UnityEngine.Serialization;
 public class AudioController : MonoBehaviour
 {
     public Action OnTrigger;
+
+    public Action OnAudioStart;
+    public Action OnAudioEnd;
     
     public AudioSource audioSource;
     public int sampleDataLength = 1024;
@@ -21,8 +24,36 @@ public class AudioController : MonoBehaviour
     private float _dealyTime { get => 60f / _BPM; }
     [FormerlySerializedAs("BPM")] [SerializeField] private int _BPM = 120;
     public int BPM { get => _BPM; }
+    
     private void Start() {
         clipSampleData = new float[sampleDataLength];
+        OnAudioStart += AudioStartEvent;
+    }
+
+    private void AudioStartEvent()
+    {
+        if (audioSource.isPlaying)
+            return;
+        
+        audioSource.Play();
+        totalTime = 0f;
+        if (isCheckVolume)
+        {
+            isTrigger = false;
+            singleTime = 0f;
+        }
+        else
+        {
+            isPlay = true;
+            WhileLoop();
+        }
+    }
+
+    private void AudioEndEvent()
+    {
+        isPlay = false;
+        audioSource.Stop();
+        isCheckVolume = false;
     }
 
     private bool isCheckVolume = false;
