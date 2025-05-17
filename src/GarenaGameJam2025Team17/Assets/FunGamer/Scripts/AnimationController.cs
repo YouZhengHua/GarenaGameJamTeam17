@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem.Users;
 using UnityEngine.Serialization;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -12,13 +13,19 @@ public class AnimationController : MonoBehaviour
     public bool left = false;
     public bool right = false;
     [SerializeField] private float delayTime = 0f;
-
+    private PlayerInput _playerInput;
     private void Awake()
     {
         _animator = this.GetComponentInChildren<Animator>();
+        _playerInput = this.GetComponent<PlayerInput>();
     }
 
-    #if ENABLE_INPUT_SYSTEM
+    private void Start()
+    {
+        InputUser.PerformPairingWithDevice(Keyboard.current, _playerInput.user);
+    }
+
+#if ENABLE_INPUT_SYSTEM
     public void OnUp(InputValue input)
     {
         up = input.isPressed;
