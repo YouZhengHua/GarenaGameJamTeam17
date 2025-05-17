@@ -44,13 +44,8 @@ public class AnimationController : MonoBehaviour
     }
     #endif
 
-    private void OnFootstep(AnimationEvent animationEvent)
+    private void PlaySound(AnimationEvent animationEvent)
     {
-        
-    }
-    
-    private void OnLand(AnimationEvent animationEvent)
-    {
-        
+        Debug.Log(animationEvent.stringParameter);
     }
 }
