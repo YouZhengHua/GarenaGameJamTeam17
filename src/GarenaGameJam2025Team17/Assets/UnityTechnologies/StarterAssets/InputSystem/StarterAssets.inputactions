@@ -269,7 +269,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardMouse;Gamepad",
+                    "groups": "KeyboardMouse;Gamepad;Xbox Controller;PS4 Controller",
                     "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -291,7 +291,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";KeyboardMouse;Gamepad;PS4 Controller;Xbox Controller",
                     "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -313,7 +313,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardMouse",
+                    "groups": "KeyboardMouse;Gamepad;Xbox Controller;PS4 Controller",
                     "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -335,7 +335,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardMouse",
+                    "groups": "KeyboardMouse;Gamepad;Xbox Controller;PS4 Controller",
                     "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -343,6 +343,138 @@
                 {
                     "name": "",
                     "id": "461ab1d2-5774-4197-b141-3efa49c28ed4",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "QTE_Game_Player_2",
+            "id": "95bad874-a5dd-4775-86b1-8c388f323b7c",
+            "actions": [
+                {
+                    "name": "Up",
+                    "type": "Button",
+                    "id": "e233b1d8-08f8-4549-adea-e860a181b285",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Down",
+                    "type": "Button",
+                    "id": "d83df27c-aae5-4da9-be25-2a745ec6e9f0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Left",
+                    "type": "Button",
+                    "id": "7fb60a78-7b94-4759-abc7-6a944ee5247b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right",
+                    "type": "Button",
+                    "id": "40fde3f9-a131-49ed-ad9e-37a705821531",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "08b678d7-3caf-4e7a-997f-91268adec53b",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse;Gamepad;Xbox Controller;PS4 Controller",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cb28b95-a271-4176-b852-bb99e0562ba6",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f27ff6d3-c1a4-4104-af95-86e6ca631a87",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse;Gamepad;Xbox Controller;PS4 Controller",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3af1d0b7-03d5-47a0-ba31-1cf7577fd8e0",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c4de35c-2169-4531-bea4-99d666a32acc",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse;Gamepad;Xbox Controller;PS4 Controller",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63263b92-9923-4c4a-8e10-84ccb6373e2c",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9448fb7-f079-4080-b280-c23fae6ada79",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse;Gamepad;Xbox Controller;PS4 Controller",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef1d7290-959e-4377-81ec-582badfe752e",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
