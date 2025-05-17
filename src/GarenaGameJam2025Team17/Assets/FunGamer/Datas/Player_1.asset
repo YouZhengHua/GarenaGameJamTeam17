@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b2803ea4634daf86e8e01f635589e7, type: 3}
   m_Name: Player_1
   m_EditorClassIdentifier: 
+  soundDatas:
+  - {fileID: 0}

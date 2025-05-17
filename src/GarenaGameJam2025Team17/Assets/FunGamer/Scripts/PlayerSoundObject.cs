@@ -6,7 +6,7 @@ public class PlayerSoundObject : ScriptableObject
     public SoundData[] soundDatas;
 }
 
-public class SoundData : 
+public class SoundData : ScriptableObject
 {
     public string soundName;
     public float volume = 1f;
