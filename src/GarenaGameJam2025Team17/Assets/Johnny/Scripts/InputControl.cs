@@ -14,6 +14,12 @@ public class InputControl : MonoBehaviour
     private float _attackStartTime = 0f;
 
     public int GetCurrentGameTurn() { return gameTurn; }
+
+    public void ChangeTurn()
+    {
+        if (gameTurn == 1) gameTurn = 2;
+        else gameTurn = 1;
+    }
     private void Start()
     {
         GameSystem.BeatValue = 0f;

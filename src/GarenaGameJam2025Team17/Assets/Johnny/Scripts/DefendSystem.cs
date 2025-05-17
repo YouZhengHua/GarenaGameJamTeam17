@@ -13,15 +13,12 @@ public class DefendSystem : MonoBehaviour
     [SerializeField] UnityEvent OndefectFail;
 
     private bool _isDefend = false;
-    private bool _isJudge = false;
-    private bool _isJudgeSuccess = false;
     private float _startDefendTime = 0f;
     private int _judgeBeatIndex = 0; 
 
-    IEnumerator JudgeSuccess()
+    public void JudgeSuccess(bool isSuccess)
     {
-        yield return new WaitForEndOfFrame();
-        if (_isJudgeSuccess)
+        if (isSuccess)
         {
             defendOkOBJ.SetActive(true);
             if (OndefectSuccess != null) OndefectSuccess.Invoke();
@@ -31,9 +28,29 @@ public class DefendSystem : MonoBehaviour
             defendFailOBJ.SetActive(true);
             if (OndefectFail!= null) OndefectFail.Invoke();
         }
-        _isJudgeSuccess = false ;
     }
-
+    public void CheckJudge()
+    {
+       bool isSuccess = false ;
+       Collider[] hitCollider = Physics.OverlapBox(transform.position, new Vector3(2f, 4f, 1f));
+       if (hitCollider.Length > 0)
+       {
+            for (int i = 0; i < hitCollider.Length; i++)
+            {
+                if (hitCollider[i].CompareTag("BeatJudge"))
+                {
+                    BeatMoveSystem beatMoveSystem = hitCollider[i].gameObject.GetComponent<BeatMoveSystem>();
+                    if (beatMoveSystem != null)
+                    {
+                        if (beatMoveSystem.GetBeatIndex() != _judgeBeatIndex) continue;
+                        beatMoveSystem.SuccessJudge();
+                        isSuccess = true;
+                    }
+                }
+            }
+       }
+        JudgeSuccess(isSuccess);
+    }
     private void Start()
     {
         objCollider = GetComponent<BoxCollider>();
@@ -53,26 +70,22 @@ public class DefendSystem : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     _judgeBeatIndex = 0;
-                    _isJudge = true;
-                    StartCoroutine(JudgeSuccess());
+                    CheckJudge();
                 }
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     _judgeBeatIndex = 1;
-                    _isJudge = true;
-                    StartCoroutine(JudgeSuccess());
+                    CheckJudge();
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     _judgeBeatIndex = 2;
-                    _isJudge = true;
-                    StartCoroutine(JudgeSuccess());
+                    CheckJudge();
                 }
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     _judgeBeatIndex = 3;
-                    _isJudge = true;
-                    StartCoroutine(JudgeSuccess());
+                    CheckJudge();
                 }
             }
             if (inputControl.GetCurrentGameTurn() == 2 && playerID == 1)
@@ -80,43 +93,24 @@ public class DefendSystem : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     _judgeBeatIndex = 0;
-                    _isJudge = true;
-                    StartCoroutine(JudgeSuccess());
+                    CheckJudge();
                 }
                 if (Input.GetKeyDown(KeyCode.S))
                 {
                     _judgeBeatIndex = 1;
-                    _isJudge = true;
-                    StartCoroutine(JudgeSuccess());
+                    CheckJudge();
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
                     _judgeBeatIndex = 2;
-                    _isJudge = true;
-                    StartCoroutine(JudgeSuccess());
+                    CheckJudge();
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
                     _judgeBeatIndex = 3;
-                    _isJudge = true;
-                    StartCoroutine(JudgeSuccess());
+                    CheckJudge();
                 }
             }
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!_isJudge) return;
-        if (other.gameObject.CompareTag("BeatJudge"))
-        {
-            BeatMoveSystem beatMoveSystem = other.gameObject.GetComponent<BeatMoveSystem>();
-            if (beatMoveSystem != null)
-            {
-                if (beatMoveSystem.GetBeatIndex() != _judgeBeatIndex) return;
-                beatMoveSystem.SuccessJudge();
-                _isJudgeSuccess = true;
-            }
-        }
-        _isJudge = false;
     }
 }
