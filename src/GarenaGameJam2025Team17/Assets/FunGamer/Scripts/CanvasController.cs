@@ -33,11 +33,11 @@ public class CanvasController : MonoBehaviour
     
     public void ShowCanvas()
     {
-        isHide = true;
+        isHide = false;
     }
 
     public void HideCanvas()
     {
-        isHide = false;
+        isHide = true;
     }
 }

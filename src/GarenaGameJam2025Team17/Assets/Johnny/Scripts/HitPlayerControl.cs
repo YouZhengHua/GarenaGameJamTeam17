@@ -26,10 +26,10 @@ public class HitPlayerControl : MonoBehaviour
             GameSystem.BeatValue += _hitPoint;
         }
         if (OnHitEffect != null) OnHitEffect.Invoke();
-        mainBattleUIController.UpdateBeatUI();
+        //mainBattleUIController.UpdateBeatUI();
 
-        ////Óàº­Ôö¼Ó
-        //FindObjectOfType<´ò“ô¸ĞĞ§¹û>().²¥·Å´ò“ô¸Ğ();
+        ////ï¿½àº­ï¿½ï¿½ï¿½ï¿½
+        //FindObjectOfType<ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½>().ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½ï¿½();
 
     }
 
@@ -39,10 +39,10 @@ public class HitPlayerControl : MonoBehaviour
         {
             BeatMoveSystem beatMoveSystem = other.gameObject.GetComponent<BeatMoveSystem>();
             if (beatMoveSystem != null)
-            {  // Ä?×àÎï¼şÈ¡µÃ“ôÖĞ·Ö”µ
-                _hitPoint = beatMoveSystem.GetHitPoint(); // Í¨ÖªÄÇ?Îï¼ş¡¸Äã±»´òÁË¡¹
+            {  // ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ã“ï¿½ï¿½Ğ·Ö”ï¿½
+                _hitPoint = beatMoveSystem.GetHitPoint(); // Í¨Öªï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã±»ï¿½ï¿½ï¿½Ë¡ï¿½
                 beatMoveSystem.HitPlayer();
-                TriggerHit(); // ˆÌĞĞ±¾µØÍæ¼Ò±»´òµÄ??£¨¿Û·Ö¡¢ÌØĞ§¡¢UI£©
+                TriggerHit(); // ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½ï¿½ï¿½ï¿½Ò±ï¿½ï¿½ï¿½ï¿½??ï¿½ï¿½ï¿½Û·Ö¡ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½UIï¿½ï¿½
             }
         }
     }
