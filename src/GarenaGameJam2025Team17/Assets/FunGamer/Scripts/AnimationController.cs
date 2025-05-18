@@ -10,18 +10,21 @@ public class AnimationController : MonoBehaviour
     [SerializeField] private PlayerSoundObject playerSoundObject;
     private InputControl _inputControl;
     private GameSystemSetting _gameSystemSetting;
+    private Light _light;
     private void Awake()
     {
         _animator = this.GetComponentInChildren<Animator>();
         _playerInput = this.GetComponent<PlayerInput>();
         _inputControl = this.GetComponent<InputControl>();
         _gameSystemSetting = GameObject.Find("GameSystemSetting").GetComponent<GameSystemSetting>();
+        _light = this.GetComponentInChildren<Light>();
     }
 
     private void Start()
     {
         InputUser.PerformPairingWithDevice(Keyboard.current, _playerInput.user);
         _gameSystemSetting.OnPlayerWin.AddListener(this.PlayResult);
+        _light.gameObject.SetActive(true);
     }
 
 #if ENABLE_INPUT_SYSTEM
@@ -95,10 +98,12 @@ public class AnimationController : MonoBehaviour
         if (_inputControl.PlayerIndex == winPlayerIndex)
         {
             this.PlayWin();
+            
         }
         else
         {
             this.PlayLose();
+            _light.gameObject.SetActive(false);
         }
     }
 }
