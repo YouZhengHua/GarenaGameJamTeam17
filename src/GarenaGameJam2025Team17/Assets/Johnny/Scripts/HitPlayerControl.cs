@@ -1,21 +1,21 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 public class HitPlayerControl : MonoBehaviour
-{ // ßB½Y UI ¿ØÖÆÆ÷£¬Ø“ØŸ¸üĞÂ®‹ÃæÉÏµÄ¹×à—l
+{ // é€£çµ UI æ§åˆ¶å™¨ï¼Œè² è²¬æ›´æ–°ç•«é¢ä¸Šçš„ç¯€å¥æ¢
     [SerializeField] MainBattleUIController mainBattleUIController;
 
-    // Íæ¼Ò¾Ì–£¨1 ±íÊ¾Íæ¼Ò 1£¬ÆäËû¿ÉÄÜÊÇ AI »ò”³ÈË£©
+    // ç©å®¶ç·¨è™Ÿï¼ˆ1 è¡¨ç¤ºç©å®¶ 1ï¼Œå…¶ä»–å¯èƒ½æ˜¯ AI æˆ–æ•µäººï¼‰
 
 
     [SerializeField] int PlayerIndex = 1;
 
-    // “ôÖĞáá•şÓ|°lµÄÊÂ¼ş£¨¿ÉÔÚ Inspector ½‰ÌØĞ§µÈ£©
+    // æ“Šä¸­å¾Œæœƒè§¸ç™¼çš„äº‹ä»¶ï¼ˆå¯åœ¨ Inspector ç¶ç‰¹æ•ˆç­‰ï¼‰
 
 
     [SerializeField] UnityEvent OnHitEffect;
 
-    // ±»´òµÄ·Ö”µ£¨ÄÅĞ¶¨…^‰KÄÃíµÄ£©
+    // è¢«æ‰“çš„åˆ†æ•¸ï¼ˆå¾åˆ¤å®šå€å¡Šæ‹¿ä¾†çš„ï¼‰
 
 
     private float _hitPoint = 0f;
@@ -24,21 +24,21 @@ public class HitPlayerControl : MonoBehaviour
     {
         if (PlayerIndex == 1)
         {
-            // Íæ¼Ò±»´ò£º¿Û·Ö
+            // ç©å®¶è¢«æ‰“ï¼šæ‰£åˆ†
 
             GameSystem.BeatValue -= _hitPoint;
 
-            //Óàº­Ôö¼Ó
-            // Ö»ÓĞ±»´ò²Å²¥·Å´ò“ô¸Ğ
-            var ¿ÛÑªÌØĞ§ = FindObjectOfType<¿ÛÑªĞ§¹û>();
-            if (¿ÛÑªÌØĞ§ != null)
+            //ä½™æ¶µå¢åŠ 
+            // åªæœ‰è¢«æ‰“æ‰æ’­æ”¾æ‰“æ“Šæ„Ÿ
+            var æ‰£è¡€ç‰¹æ•ˆ = FindObjectOfType<æ‰£è¡€æ•ˆæœ>();
+            if (æ‰£è¡€ç‰¹æ•ˆ != null)
             {
-                ¿ÛÑªÌØĞ§.²¥·Å¿ÛÑªÌØĞ§();
+                æ‰£è¡€ç‰¹æ•ˆ.æ’­æ”¾æ‰£è¡€ç‰¹æ•ˆ();
             }
         }
         else
         {
-            // ·ÇÍæ¼Ò±»´ò£º¼Ó·Ö£¨¿ÉÄÜÊÇ´òµ½”³ÈË£©
+            // éç©å®¶è¢«æ‰“ï¼šåŠ åˆ†ï¼ˆå¯èƒ½æ˜¯æ‰“åˆ°æ•µäººï¼‰
 
             GameSystem.BeatValue += _hitPoint;
         }
@@ -55,10 +55,10 @@ public class HitPlayerControl : MonoBehaviour
         {
             BeatMoveSystem beatMoveSystem = other.gameObject.GetComponent<BeatMoveSystem>();
             if (beatMoveSystem != null)
-            {  // Ä¹×àÎï¼şÈ¡µÃ“ôÖĞ·Ö”µ
-                _hitPoint = beatMoveSystem.GetHitPoint(); // Í¨ÖªÄÇ‚€Îï¼ş¡¸Äã±»´òÁË¡¹
+            {  // å¾ç¯€å¥ç‰©ä»¶å–å¾—æ“Šä¸­åˆ†æ•¸
+                _hitPoint = beatMoveSystem.GetHitPoint(); // é€šçŸ¥é‚£å€‹ç‰©ä»¶ã€Œä½ è¢«æ‰“äº†ã€
                 beatMoveSystem.HitPlayer();
-                TriggerHit(); // ˆÌĞĞ±¾µØÍæ¼Ò±»´òµÄß‰İ‹£¨¿Û·Ö¡¢ÌØĞ§¡¢UI£©
+                TriggerHit(); // åŸ·è¡Œæœ¬åœ°ç©å®¶è¢«æ‰“çš„é‚è¼¯ï¼ˆæ‰£åˆ†ã€ç‰¹æ•ˆã€UIï¼‰
             }
         }
     }
