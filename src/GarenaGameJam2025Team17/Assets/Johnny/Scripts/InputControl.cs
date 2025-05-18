@@ -1,11 +1,15 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 public class InputControl : MonoBehaviour
 {
     [SerializeField] GameObject[] playerShootBeatOBJ; 
     [SerializeField] float playerAttack = 3f;
+    [SerializeField] GameObject JusgeArea;
+    [SerializeField] UnityEvent OnInputOK;
+    [SerializeField] UnityEvent OnInputFail;
     
     private int gameTurn
     {
@@ -33,14 +37,21 @@ public class InputControl : MonoBehaviour
 
     private void OnUp(InputValue input)
     {
+        if (isAttack) return;
+        isAttack = true;
+        _attackStartTime = Time.time;
+
         if (gameTurn != attackTurn || !input.isPressed)
             return;
-
         CreateBeat(0);
     }
 
     private void OnDown(InputValue input)
     {
+        if (isAttack) return;
+        isAttack = true;
+        _attackStartTime = Time.time;
+
         if (gameTurn != attackTurn || !input.isPressed)
             return;
         
@@ -49,6 +60,11 @@ public class InputControl : MonoBehaviour
 
     private void OnLeft(InputValue input)
     {
+
+        if (isAttack) return;
+        isAttack = true;
+        _attackStartTime = Time.time;
+
         if (gameTurn != attackTurn || !input.isPressed)
             return;
         
@@ -57,6 +73,11 @@ public class InputControl : MonoBehaviour
     
     private void OnRight(InputValue input)
     {
+
+        if (isAttack) return;
+        isAttack = true;
+        _attackStartTime = Time.time;
+
         if (gameTurn != attackTurn || !input.isPressed)
             return;
         
@@ -65,12 +86,19 @@ public class InputControl : MonoBehaviour
     private GameObject JudgeHitTime()
     {
         GameObject attchItem = null;
-        Collider[] hitCollider = Physics.OverlapBox(gameObject.transform.position, gameObject.transform.localScale);
+        Collider[] hitCollider = Physics.OverlapBox(JusgeArea.transform.position, JusgeArea.transform.localScale);
         if (hitCollider.Length > 0)
         {
             for (int i = 0; i < hitCollider.Length; i++)
             {
-                if (hitCollider[i].CompareTag("EmptyBeat")) attchItem = hitCollider[i].gameObject;
+                EmptyBeatMoveSystem emptyBeatMoveSystem;
+                if (hitCollider[i].TryGetComponent<EmptyBeatMoveSystem>(out emptyBeatMoveSystem))
+                {
+                    if (emptyBeatMoveSystem.GetPlayerIndex() == attackTurn)
+                    {
+                        attchItem = hitCollider[i].gameObject;
+                    }
+                }
             }
         }
         return attchItem;
@@ -84,18 +112,20 @@ public class InputControl : MonoBehaviour
             BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
             beatMoveSystem.StartMoveBeat(moveWay, playerAttack);
             _attackStartTime = Time.time;
+            if (OnInputOK != null) OnInputOK.Invoke();
+        }
+        else 
+        {
+            if (OnInputFail != null) OnInputFail.Invoke();
         }
         isAttack = true;
     }
     
     private void Update()
     {
-        if (isAttack)
+        if (isAttack && Time.time - _attackStartTime >= GameSystem.BeatDeltaTime * GameSystem.inputDelayFactor)
         {
-            if (Time.time - _attackStartTime > GameSystem.AttackDelay) isAttack = false;
-        }
-        else
-        {
+            isAttack =false;
         }
     }
 }

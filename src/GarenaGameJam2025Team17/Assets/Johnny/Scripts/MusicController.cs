@@ -10,6 +10,7 @@ public class MusicController : MonoBehaviour
     [SerializeField] GameObject emptyBeatOBJ;
     [SerializeField] GameObject beatVisualOBJ;
     [SerializeField] AudioSource emptyAudio;
+    [SerializeField] AudioSource allBeatBGM;
     [SerializeField] AudioSource player1MainBGM;
     [SerializeField] AudioSource player2MainBGM;
     [SerializeField] int totalMusicLevel;
@@ -27,7 +28,7 @@ public class MusicController : MonoBehaviour
     [SerializeField] GameObject AttackWayRightOBJ;
     [SerializeField] GameObject AttackWayLeftOBJ;
 
-
+    private float oneTimeDistance = 19f;
     private float _gameStartCountdownTime = 0f;
     private bool _isGameStart = false;
     private bool _isGameStartCountdown = false;
@@ -44,6 +45,7 @@ public class MusicController : MonoBehaviour
     
     
     public int GetCurrentGameTurn() { return _currentGameTurn; }
+ 
     public void GameStart()
     {
         StartUIGameOBJ.SetActive(false);
@@ -55,13 +57,13 @@ public class MusicController : MonoBehaviour
         {
             GameObject newEmtyBeat = Instantiate(emptyBeatOBJ, new Vector3(player1EmptyBeatStartPoint, 2f, 0f), new Quaternion(0, 0, 0, 0));
             EmptyBeatMoveSystem emptyBeatMoveSystem = newEmtyBeat.GetComponent<EmptyBeatMoveSystem>();
-            emptyBeatMoveSystem.StartMoveBeat(1);
+            emptyBeatMoveSystem.StartMoveBeat(1, _currentGameTurn);
         }
         else
         {
             GameObject newEmtyBeat = Instantiate(emptyBeatOBJ, new Vector3(player2EmptyBeatStartPoint, 2f, 0f), new Quaternion(0, 0, 0, 0));
             EmptyBeatMoveSystem emptyBeatMoveSystem = newEmtyBeat.GetComponent<EmptyBeatMoveSystem>();
-            emptyBeatMoveSystem.StartMoveBeat(-1);
+            emptyBeatMoveSystem.StartMoveBeat(-1, _currentGameTurn);
         }
     }
 
@@ -74,7 +76,7 @@ public class MusicController : MonoBehaviour
         _currentRoundTime = int.Parse(sp1[0]);
         _currentRoundTotalBeatCount = sp1[1].Length;
 
-        GameSystem.BeatSpeed = 19/ _currentRoundTime;
+        GameSystem.BeatSpeed = oneTimeDistance / _currentRoundTime;
         _beatDeltaTime = _currentRoundTime / _currentRoundTotalBeatCount;
 
         _beatList.Clear();
@@ -86,6 +88,7 @@ public class MusicController : MonoBehaviour
         _currentRoundTimes = 0;
         _roundStartTime = Time.time;
         if (!_isGameStart) _isGameStart = true;
+        if (!allBeatBGM.isPlaying) allBeatBGM.Play();
         UpdateStatus();
     }
     public void NextRound()
@@ -152,6 +155,7 @@ public class MusicController : MonoBehaviour
     {
         UpdateStatus();
         UpdateAttackWayUI();
+        oneTimeDistance = (player2EmptyBeatStartPoint - player1EmptyBeatStartPoint) / 4;
         totalMusicLevel = everyLevelRoundCount.Length - 1;
         _gameStartCountdownTime = Time.time;
         _isGameStartCountdown = true;

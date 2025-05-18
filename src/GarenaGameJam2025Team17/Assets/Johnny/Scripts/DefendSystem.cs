@@ -8,13 +8,13 @@ public class DefendSystem : MonoBehaviour
 {
     [SerializeField] GameObject defendOkOBJ;
     [SerializeField] GameObject defendFailOBJ;
+    [SerializeField] Transform judgeArea;
     [SerializeField] UnityEvent OndefectSuccess;
     [SerializeField] UnityEvent OndefectFail;
     [SerializeField] private int defendTurn = 1;
     private bool _isDefend = false;
     private float _startDefendTime = 0f;
     private int _judgeBeatIndex = 0;
-    private Transform judgeArea;
     
     private MusicController _musicController;
 
@@ -41,7 +41,7 @@ public class DefendSystem : MonoBehaviour
     public void CheckJudge()
     {
        bool isSuccess = false ;
-       Collider[] hitCollider = Physics.OverlapBox(judgeArea.position, gameObject.transform.localScale);
+       Collider[] hitCollider = Physics.OverlapBox(judgeArea.position, judgeArea.gameObject.transform.localScale);
         if (hitCollider.Length > 0)
        {
             for (int i = 0; i < hitCollider.Length; i++)
@@ -60,12 +60,12 @@ public class DefendSystem : MonoBehaviour
        }
        JudgeSuccess(isSuccess);
     }
-    private void Start()
-    {
-        judgeArea = this.transform.Find("JudgeArea");
-    }
     private void OnUp(InputValue input)
     {
+        if (_isDefend) return;
+        _isDefend = true;
+        _startDefendTime = Time.time;
+
         if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 0;
@@ -74,6 +74,10 @@ public class DefendSystem : MonoBehaviour
     
     private void OnDown(InputValue input)
     {
+        if (_isDefend) return;
+        _isDefend = true;
+        _startDefendTime = Time.time;
+
         if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 1;
@@ -82,6 +86,10 @@ public class DefendSystem : MonoBehaviour
     
     private void OnLeft(InputValue input)
     {
+        if (_isDefend) return;
+        _isDefend = true;
+        _startDefendTime = Time.time;
+
         if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 2;
@@ -90,6 +98,10 @@ public class DefendSystem : MonoBehaviour
     
     private void OnRight(InputValue input)
     {
+        if (_isDefend) return;
+        _isDefend = true;
+        _startDefendTime = Time.time;
+
         if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 3;
@@ -98,12 +110,9 @@ public class DefendSystem : MonoBehaviour
     
     private void Update()
     {
-        if (_isDefend)
+        if (_isDefend && Time.time - _startDefendTime >= GameSystem.BeatDeltaTime * GameSystem.inputDelayFactor)
         {
-            if (Time.time - _startDefendTime > GameSystem.DefendDealy) _isDefend = false;
-        }
-        else
-        {
+            _isDefend = false;
         }
     }
 }
