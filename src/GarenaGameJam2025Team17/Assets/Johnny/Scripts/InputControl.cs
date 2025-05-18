@@ -75,7 +75,7 @@ public class InputControl : MonoBehaviour
         }
         return attchItem;
     }
-    private void CreateBeat(int beatIndex)
+    public void CreateBeat(int beatIndex)
     {
         GameObject attchEmptyBeat = JudgeHitTime();
         if (attchEmptyBeat != null)
