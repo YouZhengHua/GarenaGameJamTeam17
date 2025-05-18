@@ -30,7 +30,7 @@ public class DefendSystem : MonoBehaviour
             defendOkOBJ.SetActive(true);
             if (OndefectSuccess != null) OndefectSuccess.Invoke();
             // 👉 呼叫防禦特效 余涵增加
-            FindObjectOfType<防禦成功效果>()?.播放打擊感();
+            //FindObjectOfType<防禦成功效果>()?.播放打擊感();
         }
         else
         {
