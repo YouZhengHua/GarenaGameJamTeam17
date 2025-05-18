@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Player_1
   m_EditorClassIdentifier: 
   soundDatas:
-  - {fileID: 0}
+  - soundName: Up
+    volume: 1
+    audioClip: {fileID: 8300000, guid: 76659202cef02cb40a11c38b318fd73f, type: 3}
