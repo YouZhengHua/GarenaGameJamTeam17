@@ -94,6 +94,7 @@ public class InputControl : MonoBehaviour
     }
     public void CreateBeat(int beatIndex)
     {
+        Debug.Log(GameSystem.BeatDeltaTime * GameSystem.inputDelayFactor);
         if (isAttack) return;
         isAttack = true;
         _attackStartTime = Time.time;
