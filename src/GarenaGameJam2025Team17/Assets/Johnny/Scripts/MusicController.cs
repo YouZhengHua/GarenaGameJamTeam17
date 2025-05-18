@@ -94,7 +94,7 @@ public class MusicController : MonoBehaviour
     }
     public void NextRound()
     {
-        
+        if (allBeatBGM.isPlaying) allBeatBGM.Stop();
         _currentLevelRoundCount ++;
         _currentActualRound++;
         if (_currentLevelRoundCount > everyLevelRoundCount[_currentLevel])
