@@ -5,7 +5,7 @@ using System.Collections;
 
 public class 開始遊戲 : MonoBehaviour
 {
-    [SerializeField] private string sceneName = "";
+    [SerializeField] private int sceneName = 1;
     [SerializeField] private Image 淡出圖;  // 你自行拉進 Inspector
     [SerializeField] private float 淡出時間 = 1.0f;
 

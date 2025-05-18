@@ -3,24 +3,24 @@ using System.Collections;
 
 public class UITransitionController : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup ºÚÄ»;
-    [SerializeField] private float µ­³ö•rég = 1f;
+    [SerializeField] private CanvasGroup mainCanvasGroup;
+    [SerializeField] private float setTime = 1f;
     [SerializeField] private SceneLoader sceneLoader; // ÍÏßMÔ­±¾µÄ SceneLoader
 
-    public void ²¥·ÅÞDˆöÇÐˆö¾°()
+    public void StartFunction()
     {
-        StartCoroutine(µ­³öááÇÐˆö¾°());
+        StartCoroutine(StartTime());
     }
 
-    private IEnumerator µ­³öááÇÐˆö¾°()
+    private IEnumerator StartTime()
     {
-        ºÚÄ».gameObject.SetActive(true);
+        mainCanvasGroup.gameObject.SetActive(true);
 
         float t = 0f;
-        while (t < µ­³ö•rég)
+        while (t < setTime)
         {
             t += Time.deltaTime;
-            ºÚÄ».alpha = Mathf.Clamp01(t / µ­³ö•rég);
+            mainCanvasGroup.alpha = Mathf.Clamp01(t / setTime);
             yield return null;
         }
 
