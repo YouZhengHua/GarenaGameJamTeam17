@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class DefendSystem : MonoBehaviour
 {
     [SerializeField] InputControl inputControl;
-    [SerializeField] BoxCollider objCollider;
     [SerializeField] GameObject defendOkOBJ;
     [SerializeField] GameObject defendFailOBJ;
     [SerializeField] UnityEvent OndefectSuccess;
@@ -33,8 +32,8 @@ public class DefendSystem : MonoBehaviour
     public void CheckJudge()
     {
        bool isSuccess = false ;
-       Collider[] hitCollider = Physics.OverlapBox(judgeArea.position, new Vector3(2f, 4f, 1f));
-       if (hitCollider.Length > 0)
+       Collider[] hitCollider = Physics.OverlapBox(judgeArea.position, gameObject.transform.localScale);
+        if (hitCollider.Length > 0)
        {
             for (int i = 0; i < hitCollider.Length; i++)
             {
@@ -55,10 +54,7 @@ public class DefendSystem : MonoBehaviour
     private void Start()
     {
         judgeArea = this.transform.Find("JudgeArea");
-        objCollider = judgeArea.GetComponent<BoxCollider>();
-        objCollider.enabled = true;
     }
-
     private void OnUp(InputValue input)
     {
         if (inputControl.GetCurrentGameTurn() != defendTurn)

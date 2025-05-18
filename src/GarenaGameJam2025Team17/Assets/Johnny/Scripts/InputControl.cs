@@ -4,8 +4,6 @@ using UnityEngine.InputSystem.Users;
 public class InputControl : MonoBehaviour
 {
     [SerializeField] GameObject[] playerShootBeatOBJ; 
-    [SerializeField] float playerAttPositionX = -19f;
-    [SerializeField] float attackY = 1f;
     [SerializeField] float playerAttack = 3f;
     [SerializeField] private int gameTurn = 1;
     private bool isAttack = false;
@@ -58,13 +56,29 @@ public class InputControl : MonoBehaviour
         
         CreateBeat(3);
     }
-
+    private GameObject JudgeHitTime()
+    {
+        GameObject attchItem = null;
+        Collider[] hitCollider = Physics.OverlapBox(gameObject.transform.position, gameObject.transform.localScale);
+        if (hitCollider.Length > 0)
+        {
+            for (int i = 0; i < hitCollider.Length; i++)
+            {
+                if (hitCollider[i].CompareTag("EmptyBeat")) attchItem = hitCollider[i].gameObject;
+            }
+        }
+        return attchItem;
+    }
     private void CreateBeat(int beatIndex)
     {
-        GameObject newBeat = Instantiate(playerShootBeatOBJ[beatIndex], new Vector3(playerAttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-        BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-        beatMoveSystem.StartMoveBeat(moveWay, playerAttack);
-        _attackStartTime = Time.time;
+        GameObject attchEmptyBeat = JudgeHitTime();
+        if (attchEmptyBeat != null)
+        {
+            GameObject newBeat = Instantiate(playerShootBeatOBJ[beatIndex], attchEmptyBeat.transform.position, new Quaternion(0, 0, 0, 0));
+            BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
+            beatMoveSystem.StartMoveBeat(moveWay, playerAttack);
+            _attackStartTime = Time.time;
+        }
         isAttack = true;
     }
     

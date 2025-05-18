@@ -15,3 +15,4 @@ MonoBehaviour:
   musicStringOBJs:
   - {fileID: 11400000, guid: bff1e424168252f4fa65b9dad85ec1ee, type: 2}
   - {fileID: 11400000, guid: 0c0ee2a487af26e40815983091f7196a, type: 2}
+  - {fileID: 11400000, guid: 1c2a004cc6af9fa448685b62e3700f9e, type: 2}

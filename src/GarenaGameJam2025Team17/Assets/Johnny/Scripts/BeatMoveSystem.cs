@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class BeatMoveSystem : MonoBehaviour
 {
     [SerializeField] int beatIndex = 0;
-    [SerializeField] UnityEvent OnHit;
+    [SerializeField] AudioSource BeatAudioClip;
 
     private Vector3 _moveDirc = Vector3.zero;
     private float _attackAmount = 0f;
@@ -30,4 +30,12 @@ public class BeatMoveSystem : MonoBehaviour
         if (!_canMove) return;
         transform.position += _moveDirc * GameSystem.BeatSpeed * Time.deltaTime;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("CenterPlay"))
+        {
+            if (BeatAudioClip != null) BeatAudioClip.Play();
+        }
+    }
+
 }
