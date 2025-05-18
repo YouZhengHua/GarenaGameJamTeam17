@@ -79,7 +79,7 @@ public class MusicController : MonoBehaviour
 
         GameSystem.BeatSpeed = oneTimeDistance / _currentRoundTime;
         _beatDeltaTime = _currentRoundTime / _currentRoundTotalBeatCount;
-
+        GameSystem.BeatDeltaTime = _beatDeltaTime;
         _beatList.Clear();
         foreach (char character in sp1[1])
         {

@@ -2751,7 +2751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   judgeShowTime: 0.2
-  inputFactor: 0.9
+  inputFactor: 0.6
   OnPlayerWin:
     m_PersistentCalls:
       m_Calls:
