@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!82 &306580609 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3078809065727002001, guid: 607b2d21f504fdf42b187f3128434630, type: 3}
+  m_PrefabInstance: {fileID: 951449409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &702434329
 Mesh:
   m_ObjectHideFlags: 0
@@ -411,6 +416,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2747149638306922913, guid: 2f8f86d7741af4e43a1e9bef287ddef1, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 306580609}
     - target: {fileID: 6468694955143297976, guid: 2f8f86d7741af4e43a1e9bef287ddef1, type: 3}
       propertyPath: m_Name
       value: Global Volume
@@ -593,7 +602,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
