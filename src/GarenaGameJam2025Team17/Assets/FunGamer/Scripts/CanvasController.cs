@@ -2,24 +2,24 @@ using UnityEngine;
 [RequireComponent(typeof(CanvasGroup))]
 public class CanvasController : MonoBehaviour
 {
-    private CanvasGroup _canvasGroup;
+    protected CanvasGroup _canvasGroup;
 
-    [SerializeField] private bool isHide = false;
-    [SerializeField] private float hideSpeed = 10f;
+    [SerializeField] protected bool isHide = false;
+    [SerializeField] protected float hideSpeed = 10f;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _canvasGroup = this.GetComponent<CanvasGroup>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         _canvasGroup.alpha = _targetAlpha;
     }
 
-    private float _targetAlpha => isHide ? 0f : 1f;
+    protected float _targetAlpha => isHide ? 0f : 1f;
 
-    private void Update()
+    protected virtual void Update()
     {;
         if (_canvasGroup.alpha != _targetAlpha)
         {
@@ -31,12 +31,12 @@ public class CanvasController : MonoBehaviour
         }
     }
     
-    public void ShowCanvas()
+    public virtual void ShowCanvas()
     {
         isHide = false;
     }
 
-    public void HideCanvas()
+    public virtual void HideCanvas()
     {
         isHide = true;
     }

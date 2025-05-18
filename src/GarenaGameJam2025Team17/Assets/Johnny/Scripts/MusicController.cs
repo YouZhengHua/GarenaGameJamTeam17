@@ -51,6 +51,7 @@ public class MusicController : MonoBehaviour
         StartUIGameOBJ.SetActive(false);
         RoundInitial();
     }
+    
     public void CreateEmptyBeat()
     {
         if (_currentGameTurn == 1)
@@ -111,6 +112,16 @@ public class MusicController : MonoBehaviour
         ChangeTurn();
         RoundInitial();
     }
+
+    public void GameEnd()
+    {
+        _isGameStart = false;
+        emptyAudio.Stop();
+        allBeatBGM.Stop();
+        player1MainBGM.Stop();
+        player2MainBGM.Stop();
+    }
+    
     public void ChangeTurn()
     {
         if (_currentGameTurn == 1) _currentGameTurn = 2;

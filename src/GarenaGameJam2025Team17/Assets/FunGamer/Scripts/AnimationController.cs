@@ -11,6 +11,7 @@ public class AnimationController : MonoBehaviour
     private InputControl _inputControl;
     private GameSystemSetting _gameSystemSetting;
     private Light _light;
+    private bool isEnd = false;
     private void Awake()
     {
         _animator = this.GetComponentInChildren<Animator>();
@@ -30,6 +31,7 @@ public class AnimationController : MonoBehaviour
 #if ENABLE_INPUT_SYSTEM
     public void OnUp(InputValue input)
     {
+        if (isEnd) return;
         if(_inputControl.IsAttackTurn)
             _animator.SetTrigger("Up");
         else
@@ -38,6 +40,7 @@ public class AnimationController : MonoBehaviour
     
     public void OnDown(InputValue input)
     {
+        if (isEnd) return;
         if(_inputControl.IsAttackTurn)
             _animator.SetTrigger("Down");
         else
@@ -46,6 +49,7 @@ public class AnimationController : MonoBehaviour
     
     public void OnLeft(InputValue input)
     {
+        if (isEnd) return;
         if(_inputControl.IsAttackTurn)
             _animator.SetTrigger("Left");
         else
@@ -54,6 +58,7 @@ public class AnimationController : MonoBehaviour
     
     public void OnRight(InputValue input)
     {
+        if (isEnd) return;
         if(_inputControl.IsAttackTurn)
             _animator.SetTrigger("Right");
         else
@@ -63,7 +68,7 @@ public class AnimationController : MonoBehaviour
 
     private void PlaySound(AnimationEvent animationEvent)
     {
-        Debug.Log(animationEvent.stringParameter);
+        if (isEnd) return;
         if(playerSoundObject != null && playerSoundObject.TryGetSoundData(animationEvent.stringParameter, out var soundData))
         {
             var audioSources = GameObject.FindObjectsByType<AudioSource>(FindObjectsSortMode.None)[0];
@@ -73,11 +78,13 @@ public class AnimationController : MonoBehaviour
 
     public void PlayHurtAnimation()
     {
+        if (isEnd) return;
         _animator.SetTrigger("Hurt");
     }
     
     public void PlayDefend()
     {
+        if (isEnd) return;
         _animator.SetTrigger("Defend");
     }
 
@@ -105,5 +112,7 @@ public class AnimationController : MonoBehaviour
             this.PlayLose();
             _light?.gameObject.SetActive(false);
         }
+
+        isEnd = true;
     }
 }
