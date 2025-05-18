@@ -1,16 +1,13 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.Users;
-using UnityEngine.Serialization;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 public class AnimationController : MonoBehaviour
 {
     private Animator _animator;
-    [SerializeField] private float delayTime = 0f;
     private PlayerInput _playerInput;
+    [SerializeField] private PlayerSoundObject playerSoundObject;
     private void Awake()
     {
         _animator = this.GetComponentInChildren<Animator>();
@@ -47,5 +44,32 @@ public class AnimationController : MonoBehaviour
     private void PlaySound(AnimationEvent animationEvent)
     {
         Debug.Log(animationEvent.stringParameter);
+        if(playerSoundObject != null && playerSoundObject.TryGetSoundData(animationEvent.stringParameter, out var soundData))
+        {
+            var audioSources = GameObject.FindObjectsByType<AudioSource>(FindObjectsSortMode.None)[0];
+            audioSources.PlayOneShot(soundData.audioClip, soundData.volume);
+        }
+    }
+
+    public void PlayHurtAnimation()
+    {
+        _animator.SetTrigger("Hurt");
+    }
+    
+    public void PlayDefend()
+    {
+        _animator.SetTrigger("Defend");
+    }
+
+    public void PlayWin()
+    {
+        _animator.SetBool("IsWin", true);
+        _animator.SetTrigger("WinTrigger");
+    }
+    
+    public void PlayLose()
+    {
+        _animator.SetBool("IsDie", true);
+        _animator.SetTrigger("DieTrigger");
     }
 }
