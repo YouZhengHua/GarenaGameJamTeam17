@@ -763,7 +763,6 @@ GameObject:
   - component: {fileID: 327461058}
   - component: {fileID: 327461062}
   - component: {fileID: 327461061}
-  - component: {fileID: 327461059}
   m_Layer: 0
   m_Name: JudgeArea
   m_TagString: PlayerJudgeArea
@@ -786,28 +785,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1626093107}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &327461059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327461057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16712c19f04fd894390c8aa90d03ebd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputControl: {fileID: 2137239086}
-  defendOkOBJ: {fileID: 573750800}
-  defendFailOBJ: {fileID: 780540236}
-  OndefectSuccess:
-    m_PersistentCalls:
-      m_Calls: []
-  OndefectFail:
-    m_PersistentCalls:
-      m_Calls: []
-  defendTurn: 1
 --- !u!23 &327461061
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1030,6 +1007,9 @@ GameObject:
   - component: {fileID: 356574612}
   - component: {fileID: 356574611}
   - component: {fileID: 356574610}
+  - component: {fileID: 356574613}
+  - component: {fileID: 356574614}
+  - component: {fileID: 356574615}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -1109,6 +1089,77 @@ Transform:
   - {fileID: 1615179768}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &356574613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356574609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd20843348dd7849a336f40690abac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShootBeatOBJ:
+  - {fileID: 5108445546800308807, guid: 88990da27970d3f458f54851bcf3b7f2, type: 3}
+  - {fileID: 5108445546800308807, guid: e0983cb8623b6ae4eac427ca1349605b, type: 3}
+  - {fileID: 5108445546800308807, guid: dc316f42e2a93894cafd8778573bfc8d, type: 3}
+  - {fileID: 5108445546800308807, guid: fceaa559de9a8dc4299043b51d58857a, type: 3}
+  playerAttack: 3
+  moveWay: 1
+  attackTurn: 1
+--- !u!114 &356574614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356574609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: QTE_Game_Player_1
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &356574615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356574609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16712c19f04fd894390c8aa90d03ebd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defendOkOBJ: {fileID: 1916514380}
+  defendFailOBJ: {fileID: 606681062}
+  OndefectSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  OndefectFail:
+    m_PersistentCalls:
+      m_Calls: []
+  defendTurn: 2
 --- !u!1 &437666001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,7 +1437,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16712c19f04fd894390c8aa90d03ebd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputControl: {fileID: 2137239086}
   defendOkOBJ: {fileID: 1916514380}
   defendFailOBJ: {fileID: 606681062}
   OndefectSuccess:
@@ -3399,6 +3449,9 @@ GameObject:
   - component: {fileID: 1626093106}
   - component: {fileID: 1626093105}
   - component: {fileID: 1626093108}
+  - component: {fileID: 1626093109}
+  - component: {fileID: 1626093110}
+  - component: {fileID: 1626093111}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -3495,6 +3548,77 @@ MonoBehaviour:
   OnHitEffect:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1626093109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626093104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd20843348dd7849a336f40690abac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShootBeatOBJ:
+  - {fileID: 5108445546800308807, guid: 103cfc01a4fdb834daf42ffed6bcfcd9, type: 3}
+  - {fileID: 5108445546800308807, guid: 272b58f7beedc1541bcd61fca6d4739d, type: 3}
+  - {fileID: 5108445546800308807, guid: c1089b173d5f8374795c310657e6fc8b, type: 3}
+  - {fileID: 5108445546800308807, guid: 16cc182118da6324bba7bc622bf97039, type: 3}
+  playerAttack: 3
+  moveWay: -1
+  attackTurn: 2
+--- !u!114 &1626093110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626093104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: QTE_Game_Player_2
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1626093111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626093104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16712c19f04fd894390c8aa90d03ebd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defendOkOBJ: {fileID: 573750800}
+  defendFailOBJ: {fileID: 780540236}
+  OndefectSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  OndefectFail:
+    m_PersistentCalls:
+      m_Calls: []
+  defendTurn: 1
 --- !u!1 &1630946673
 GameObject:
   m_ObjectHideFlags: 0
@@ -4186,7 +4310,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2137239085}
-  - component: {fileID: 2137239086}
   m_Layer: 0
   m_Name: InputEventControl
   m_TagString: Untagged
@@ -4209,23 +4332,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 848594335}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2137239086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137239084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bd20843348dd7849a336f40690abac6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerShootBeatOBJ: []
-  playerAttack: 3
-  gameTurn: 1
-  moveWay: 1
-  attackTurn: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

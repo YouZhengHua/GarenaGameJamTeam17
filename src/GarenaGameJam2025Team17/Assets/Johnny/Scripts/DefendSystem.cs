@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -5,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class DefendSystem : MonoBehaviour
 {
-    [SerializeField] InputControl inputControl;
     [SerializeField] GameObject defendOkOBJ;
     [SerializeField] GameObject defendFailOBJ;
     [SerializeField] UnityEvent OndefectSuccess;
@@ -16,6 +16,13 @@ public class DefendSystem : MonoBehaviour
     private int _judgeBeatIndex = 0;
     private Transform judgeArea;
     
+    private MusicController _musicController;
+
+    private void Awake()
+    {
+        _musicController = GameObject.Find("MusicSystem").GetComponent<MusicController>();
+    }
+
     public void JudgeSuccess(bool isSuccess)
     {
         if (isSuccess)
@@ -57,7 +64,7 @@ public class DefendSystem : MonoBehaviour
     }
     private void OnUp(InputValue input)
     {
-        if (inputControl.GetCurrentGameTurn() != defendTurn)
+        if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 0;
         CheckJudge();
@@ -65,7 +72,7 @@ public class DefendSystem : MonoBehaviour
     
     private void OnDown(InputValue input)
     {
-        if (inputControl.GetCurrentGameTurn() != defendTurn)
+        if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 1;
         CheckJudge();
@@ -73,7 +80,7 @@ public class DefendSystem : MonoBehaviour
     
     private void OnLeft(InputValue input)
     {
-        if (inputControl.GetCurrentGameTurn() != defendTurn)
+        if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 2;
         CheckJudge();
@@ -81,7 +88,7 @@ public class DefendSystem : MonoBehaviour
     
     private void OnRight(InputValue input)
     {
-        if (inputControl.GetCurrentGameTurn() != defendTurn)
+        if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 3;
         CheckJudge();
