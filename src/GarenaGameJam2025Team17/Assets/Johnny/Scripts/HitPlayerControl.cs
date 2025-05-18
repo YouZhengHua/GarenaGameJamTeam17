@@ -27,6 +27,14 @@ public class HitPlayerControl : MonoBehaviour
             // 玩家被打：扣分
 
             GameSystem.BeatValue -= _hitPoint;
+
+            //余涵增加
+            // 只有被打才播放打擊感
+            var 扣血特效 = FindObjectOfType<扣血效果>();
+            if (扣血特效 != null)
+            {
+                扣血特效.播放扣血特效();
+            }
         }
         else
         {
@@ -37,8 +45,7 @@ public class HitPlayerControl : MonoBehaviour
         if (OnHitEffect != null) OnHitEffect.Invoke();
         mainBattleUIController.UpdateBeatUI();
 
-        //余涵增加
-        FindObjectOfType<打擊感效果>().播放打擊感();
+       
 
     }
 
