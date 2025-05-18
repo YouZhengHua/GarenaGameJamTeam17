@@ -89,29 +89,26 @@ public class MusicController : MonoBehaviour
         _roundStartTime = Time.time;
         if (!_isGameStart) _isGameStart = true;
         if (!allBeatBGM.isPlaying) allBeatBGM.Play();
+        ChangePlayerMusic(0);
         UpdateStatus();
     }
     public void NextRound()
     {
+        
         _currentLevelRoundCount ++;
         _currentActualRound++;
         if (_currentLevelRoundCount > everyLevelRoundCount[_currentLevel])
         {
-            NextLevel();
-            return;
+            _currentLevel++;
+            _currentLevelRoundCount = 0;
+            if (_currentLevel > totalMusicLevel)
+            {
+                if (OnGameOver != null) OnGameOver.Invoke();
+                _isGameStart = false;
+                return;
+            }
         }
-        RoundInitial();
-    }
-    public void NextLevel()
-    {
-        _currentLevel++;
-        if (_currentLevel > totalMusicLevel)
-        {
-            if (OnGameOver != null) OnGameOver.Invoke();
-            _isGameStart = false;
-            return;
-        }
-        _currentLevelRoundCount = 0;
+        ChangeTurn();
         RoundInitial();
     }
     public void ChangeTurn()
@@ -120,17 +117,22 @@ public class MusicController : MonoBehaviour
         else _currentGameTurn = 1;
         UpdateAttackWayUI();
     }
-    public void ChangeTurnMusic()
+    public void ChangePlayerMusic(int playerID)
     {
-        if (_currentGameTurn == 1)
+        if (playerID == 0)
+        {
+            player2MainBGM.Stop();
+            player1MainBGM.Stop();
+        }
+        if (playerID == 1)
         {
             player2MainBGM.Stop();
             player1MainBGM.Play();
         }
-        else
+        if (playerID == 2)
         {
             player1MainBGM.Stop();
-            player1MainBGM.Play();
+            player2MainBGM.Play();
         }
     }
     public void UpdateStatus()
@@ -150,6 +152,10 @@ public class MusicController : MonoBehaviour
             AttackWayRightOBJ.SetActive(false);
             AttackWayLeftOBJ.SetActive(true);
         }
+    }
+    private void Awake()
+    {
+        _currentGameTurn = GameSystem.startGameTurn;
     }
     private void Start()
     {
@@ -173,22 +179,20 @@ public class MusicController : MonoBehaviour
         }
         if (!_isGameStart) return;
 
-        if (_currentRoundTimes == 0 && !LeasonHintOBJ.activeSelf) LeasonHintOBJ.SetActive(true);
-
         if (Time.time - _roundStartTime >= _beatDeltaTime * (_currentBeatIndex + _currentRoundTotalBeatCount * _currentRoundTimes))
         {
-            if (_currentRoundTimes == 1 || _currentRoundTimes == 5)
+            if (_currentRoundTimes == 0)
             {
                 float leftTime = (_currentRoundTotalBeatCount - _currentBeatIndex) * _beatDeltaTime;
 
-                if (leftTime>0.49999f && leftTime<0.50001f) threeTwoOneAudio[0].Play();
+                if (leftTime > 0.49999f && leftTime < 0.50001f) threeTwoOneAudio[0].Play();
                 if (leftTime > 0.99999f && leftTime < 1.00001f) threeTwoOneAudio[1].Play();
                 if (leftTime > 1.49999f && leftTime < 1.50001f) threeTwoOneAudio[2].Play();
                 if (leftTime > 1.99999f && leftTime < 2.00001f) threeTwoOneAudio[3].Play();
             }
-            if (_beatList[_currentBeatIndex] == "1")
+            if (_currentRoundTimes > 0 && _beatList[_currentBeatIndex] == "1")
             {
-                if (_currentRoundTimes == 1 || _currentRoundTimes == 5)  CreateEmptyBeat();
+                if (_currentRoundTimes == 1)  CreateEmptyBeat();
                 emptyAudio.Play();
                 beatVisualOBJ.SetActive(true);
             }
@@ -198,18 +202,19 @@ public class MusicController : MonoBehaviour
             {
                 _currentBeatIndex = 0;
                 _currentRoundTimes++;
-                if (LeasonHintOBJ.activeSelf) LeasonHintOBJ.SetActive(false);
-                if (_currentRoundTimes == 1) ChangeTurnMusic();
-                if (_currentRoundTimes == 5)
+                if (_currentRoundTimes == 1)
                 {
-                    ChangeTurn();
-                    ChangeTurnMusic();
+                    if (!LeasonHintOBJ.activeSelf) LeasonHintOBJ.SetActive(true);
+                    ChangePlayerMusic(_currentGameTurn);
                 }
-                    if (_currentRoundTimes == 9)
+                if (_currentRoundTimes == 2) if (LeasonHintOBJ.activeSelf) LeasonHintOBJ.SetActive(false);
+                if (_currentRoundTimes == 3) ChangePlayerMusic(0);
+                if (_currentRoundTimes == 4)
                 {
-                    ChangeTurn();
-                    NextRound();
+                    if (_currentGameTurn == 1) ChangePlayerMusic(2);
+                    else ChangePlayerMusic(1);
                 }
+                if (_currentRoundTimes == 5) NextRound();
             }
         }
 
