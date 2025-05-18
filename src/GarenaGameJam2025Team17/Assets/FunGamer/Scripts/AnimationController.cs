@@ -16,15 +16,15 @@ public class AnimationController : MonoBehaviour
         _animator = this.GetComponentInChildren<Animator>();
         _playerInput = this.GetComponent<PlayerInput>();
         _inputControl = this.GetComponent<InputControl>();
-        _gameSystemSetting = GameObject.Find("GameSystemSetting").GetComponent<GameSystemSetting>();
+        _gameSystemSetting = GameObject.Find("GameSystemSetting")?.GetComponent<GameSystemSetting>();
         _light = this.GetComponentInChildren<Light>();
     }
 
     private void Start()
     {
         InputUser.PerformPairingWithDevice(Keyboard.current, _playerInput.user);
-        _gameSystemSetting.OnPlayerWin.AddListener(this.PlayResult);
-        _light.gameObject.SetActive(true);
+        _gameSystemSetting?.OnPlayerWin.AddListener(this.PlayResult);
+        _light?.gameObject.SetActive(true);
     }
 
 #if ENABLE_INPUT_SYSTEM
@@ -103,7 +103,7 @@ public class AnimationController : MonoBehaviour
         else
         {
             this.PlayLose();
-            _light.gameObject.SetActive(false);
+            _light?.gameObject.SetActive(false);
         }
     }
 }

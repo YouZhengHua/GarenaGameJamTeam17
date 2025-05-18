@@ -5,13 +5,7 @@ public class EffectController : MonoBehaviour
 {
     private Volume _volume;
     private bool _haveEffect = false;
-    private int _BPM = 120;
-    private AudioController _audioController;
-
-    public int BPM
-    {
-        get => _audioController?.BPM ?? _BPM;
-    }
+    [SerializeField] private AudioController _audioController;
 
     private void Awake()
     {
@@ -28,7 +22,7 @@ public class EffectController : MonoBehaviour
     {
         if (_haveEffect)
         {
-            _volume.weight = Mathf.Lerp(_volume.weight, 0f, Time.deltaTime * BPM / 10f );
+            _volume.weight = Mathf.Lerp(_volume.weight, 0f, Time.deltaTime * 120f / 10f );
         }
 
         if (Mathf.Approximately(_volume.weight, 0f))
