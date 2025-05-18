@@ -1,26 +1,30 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 public class InputControl : MonoBehaviour
 {
     [SerializeField] GameObject[] playerShootBeatOBJ; 
-    [SerializeField] float playerAttPositionX = -19f;
-    [SerializeField] float attackY = 1f;
     [SerializeField] float playerAttack = 3f;
-    [SerializeField] private int gameTurn = 1;
+    
+    private int gameTurn
+    {
+        get => _musicController.GetCurrentGameTurn();
+    }
+
     private bool isAttack = false;
     private float _attackStartTime = 0f;
     [SerializeField] private int moveWay = 1;
 
     [SerializeField] private int attackTurn = 1;
 
-    public int GetCurrentGameTurn() { return gameTurn; }
+    private MusicController _musicController;
 
-    public void ChangeTurn()
+    private void Awake()
     {
-        if (gameTurn == 1) gameTurn = 2;
-        else gameTurn = 1;
+        _musicController = GameObject.Find("MusicSystem").GetComponent<MusicController>();
     }
+
     private void Start()
     {
         GameSystem.BeatValue = 0f;
@@ -58,13 +62,29 @@ public class InputControl : MonoBehaviour
         
         CreateBeat(3);
     }
-
-    public void CreateBeat(int beatIndex)
+    private GameObject JudgeHitTime()
     {
-        GameObject newBeat = Instantiate(playerShootBeatOBJ[beatIndex], new Vector3(playerAttPositionX, attackY, 0f), new Quaternion(0, 0, 0, 0));
-        BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
-        beatMoveSystem.StartMoveBeat(moveWay, playerAttack);
-        _attackStartTime = Time.time;
+        GameObject attchItem = null;
+        Collider[] hitCollider = Physics.OverlapBox(gameObject.transform.position, gameObject.transform.localScale);
+        if (hitCollider.Length > 0)
+        {
+            for (int i = 0; i < hitCollider.Length; i++)
+            {
+                if (hitCollider[i].CompareTag("EmptyBeat")) attchItem = hitCollider[i].gameObject;
+            }
+        }
+        return attchItem;
+    }
+    private void CreateBeat(int beatIndex)
+    {
+        GameObject attchEmptyBeat = JudgeHitTime();
+        if (attchEmptyBeat != null)
+        {
+            GameObject newBeat = Instantiate(playerShootBeatOBJ[beatIndex], attchEmptyBeat.transform.position, new Quaternion(0, 0, 0, 0));
+            BeatMoveSystem beatMoveSystem = newBeat.GetComponent<BeatMoveSystem>();
+            beatMoveSystem.StartMoveBeat(moveWay, playerAttack);
+            _attackStartTime = Time.time;
+        }
         isAttack = true;
     }
     
