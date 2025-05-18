@@ -40,7 +40,11 @@ public class DefendSystem : MonoBehaviour
     }
     public void CheckJudge()
     {
-       bool isSuccess = false ;
+        if (_isDefend) return;
+        _isDefend = true;
+        _startDefendTime = Time.time;
+
+        bool isSuccess = false ;
        Collider[] hitCollider = Physics.OverlapBox(judgeArea.position, judgeArea.gameObject.transform.localScale);
         if (hitCollider.Length > 0)
        {
@@ -62,10 +66,6 @@ public class DefendSystem : MonoBehaviour
     }
     private void OnUp(InputValue input)
     {
-        if (_isDefend) return;
-        _isDefend = true;
-        _startDefendTime = Time.time;
-
         if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 0;
@@ -74,10 +74,6 @@ public class DefendSystem : MonoBehaviour
     
     private void OnDown(InputValue input)
     {
-        if (_isDefend) return;
-        _isDefend = true;
-        _startDefendTime = Time.time;
-
         if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 1;
@@ -86,10 +82,6 @@ public class DefendSystem : MonoBehaviour
     
     private void OnLeft(InputValue input)
     {
-        if (_isDefend) return;
-        _isDefend = true;
-        _startDefendTime = Time.time;
-
         if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 2;
@@ -98,10 +90,6 @@ public class DefendSystem : MonoBehaviour
     
     private void OnRight(InputValue input)
     {
-        if (_isDefend) return;
-        _isDefend = true;
-        _startDefendTime = Time.time;
-
         if (_musicController.GetCurrentGameTurn() != defendTurn)
             return;
         _judgeBeatIndex = 3;
