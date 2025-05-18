@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class 打擊感效果 : MonoBehaviour
+public class 扣血效果 : MonoBehaviour
 {
     [Header("畫面閃紅設定")]
     public Image 攻擊閃紅畫面;   // 拖進 UI 紅色遮罩（半透明）
@@ -34,7 +34,7 @@ public class 打擊感效果 : MonoBehaviour
     }
 
     // 給隊友調用的打擊感觸發方法
-    public void 播放打擊感()
+    public void 播放扣血特效()
     {
         Debug.Log("⚡ 播放打擊感() 被呼叫！");
 
