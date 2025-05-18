@@ -10,7 +10,8 @@ public class MusicController : MonoBehaviour
     [SerializeField] GameObject emptyBeatOBJ;
     [SerializeField] GameObject beatVisualOBJ;
     [SerializeField] AudioSource emptyAudio;
-    [SerializeField] AudioSource gameBGM;
+    [SerializeField] AudioSource player1MainBGM;
+    [SerializeField] AudioSource player2MainBGM;
     [SerializeField] int totalMusicLevel;
     [SerializeField] int[] everyLevelRoundCount;
     [SerializeField] float player1EmptyBeatStartPoint = -39f;
@@ -46,7 +47,6 @@ public class MusicController : MonoBehaviour
     public void GameStart()
     {
         StartUIGameOBJ.SetActive(false);
-        if (gameBGM != null) gameBGM.Play();
         RoundInitial();
     }
     public void CreateEmptyBeat()
@@ -117,6 +117,19 @@ public class MusicController : MonoBehaviour
         else _currentGameTurn = 1;
         UpdateAttackWayUI();
     }
+    public void ChangeTurnMusic()
+    {
+        if (_currentGameTurn == 1)
+        {
+            player2MainBGM.Stop();
+            player1MainBGM.Play();
+        }
+        else
+        {
+            player1MainBGM.Stop();
+            player1MainBGM.Play();
+        }
+    }
     public void UpdateStatus()
     {
         roundText.text = (_currentActualRound + 1).ToString();
@@ -158,8 +171,6 @@ public class MusicController : MonoBehaviour
 
         if (_currentRoundTimes == 0 && !LeasonHintOBJ.activeSelf) LeasonHintOBJ.SetActive(true);
 
-
-
         if (Time.time - _roundStartTime >= _beatDeltaTime * (_currentBeatIndex + _currentRoundTotalBeatCount * _currentRoundTimes))
         {
             if (_currentRoundTimes == 1 || _currentRoundTimes == 5)
@@ -184,8 +195,13 @@ public class MusicController : MonoBehaviour
                 _currentBeatIndex = 0;
                 _currentRoundTimes++;
                 if (LeasonHintOBJ.activeSelf) LeasonHintOBJ.SetActive(false);
-                if (_currentRoundTimes == 5) ChangeTurn();
-                if (_currentRoundTimes == 9)
+                if (_currentRoundTimes == 1) ChangeTurnMusic();
+                if (_currentRoundTimes == 5)
+                {
+                    ChangeTurn();
+                    ChangeTurnMusic();
+                }
+                    if (_currentRoundTimes == 9)
                 {
                     ChangeTurn();
                     NextRound();
