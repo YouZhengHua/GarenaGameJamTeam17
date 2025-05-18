@@ -16,6 +16,9 @@ public class InputControl : MonoBehaviour
         get => _musicController.GetCurrentGameTurn();
     }
 
+    public bool IsAttackTurn => gameTurn == attackTurn;
+    public int PlayerIndex => attackTurn;
+
     private bool isAttack = false;
     private float _attackStartTime = 0f;
     [SerializeField] private int moveWay = 1;

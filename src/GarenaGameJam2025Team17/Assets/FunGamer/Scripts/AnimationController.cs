@@ -8,36 +8,53 @@ public class AnimationController : MonoBehaviour
     private Animator _animator;
     private PlayerInput _playerInput;
     [SerializeField] private PlayerSoundObject playerSoundObject;
+    private InputControl _inputControl;
+    private GameSystemSetting _gameSystemSetting;
     private void Awake()
     {
         _animator = this.GetComponentInChildren<Animator>();
         _playerInput = this.GetComponent<PlayerInput>();
+        _inputControl = this.GetComponent<InputControl>();
+        _gameSystemSetting = GameObject.Find("GameSystemSetting").GetComponent<GameSystemSetting>();
     }
 
     private void Start()
     {
         InputUser.PerformPairingWithDevice(Keyboard.current, _playerInput.user);
+        _gameSystemSetting.OnPlayerWin.AddListener(this.PlayResult);
     }
 
 #if ENABLE_INPUT_SYSTEM
     public void OnUp(InputValue input)
     {
-        _animator.SetTrigger("Up");
+        if(_inputControl.IsAttackTurn)
+            _animator.SetTrigger("Up");
+        else
+            this.PlayDefend();
     }
     
     public void OnDown(InputValue input)
     {
-        _animator.SetTrigger("Down");
+        if(_inputControl.IsAttackTurn)
+            _animator.SetTrigger("Down");
+        else
+            this.PlayDefend();
     }
     
     public void OnLeft(InputValue input)
     {
-        _animator.SetTrigger("Left");
+        if(_inputControl.IsAttackTurn)
+            _animator.SetTrigger("Left");
+        else
+            this.PlayDefend();
     }
     
     public void OnRight(InputValue input)
     {
-        _animator.SetTrigger("Right");
+        if(_inputControl.IsAttackTurn)
+            _animator.SetTrigger("Right");
+        else
+            this.PlayDefend();
     }
     #endif
 
@@ -61,15 +78,27 @@ public class AnimationController : MonoBehaviour
         _animator.SetTrigger("Defend");
     }
 
-    public void PlayWin()
+    private void PlayWin()
     {
         _animator.SetBool("IsWin", true);
         _animator.SetTrigger("WinTrigger");
     }
     
-    public void PlayLose()
+    private void PlayLose()
     {
         _animator.SetBool("IsDie", true);
         _animator.SetTrigger("DieTrigger");
+    }
+
+    public void PlayResult(int winPlayerIndex)
+    {
+        if (_inputControl.PlayerIndex == winPlayerIndex)
+        {
+            this.PlayWin();
+        }
+        else
+        {
+            this.PlayLose();
+        }
     }
 }
