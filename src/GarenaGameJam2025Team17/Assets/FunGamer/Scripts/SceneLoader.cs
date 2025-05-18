@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] private string sceneName = "";
+    [SerializeField] protected string sceneName = "";
     /// <summary>
     /// 載入目標場景
     /// </summary>
-    public void LoadScene()
+    public virtual void LoadScene()
     {
         SceneManager.LoadScene(sceneName);
     }
@@ -15,7 +15,7 @@ public class SceneLoader : MonoBehaviour
     /// <summary>
     /// 重新載入當前場景
     /// </summary>
-    public void ReloadScene()
+    public virtual void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
