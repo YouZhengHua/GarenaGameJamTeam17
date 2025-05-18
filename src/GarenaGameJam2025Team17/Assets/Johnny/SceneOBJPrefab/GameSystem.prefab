@@ -1030,7 +1030,7 @@ MonoBehaviour:
   player1MainBGM: {fileID: 500927349933330440}
   player2MainBGM: {fileID: 885754530105803476}
   totalMusicLevel: 2
-  everyLevelRoundCount: 010000000200000003000000
+  everyLevelRoundCount: 010000000400000004000000
   player1EmptyBeatStartPoint: -38
   player2EmptyBeatStartPoint: 38
   OnGameOver:
@@ -2321,7 +2321,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u653B\u64CA\u65B9\u5411:"
+  m_Text: 'Way:'
 --- !u!1 &3406135146915977163
 GameObject:
   m_ObjectHideFlags: 0
@@ -4439,7 +4439,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6CE8\u610F\u807D\u7BC0\u594F!!"
+  m_Text: Listen!!
 --- !u!1 &7634487733743335801
 GameObject:
   m_ObjectHideFlags: 0
