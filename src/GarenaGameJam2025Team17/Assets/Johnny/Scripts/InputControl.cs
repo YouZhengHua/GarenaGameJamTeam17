@@ -40,9 +40,6 @@ public class InputControl : MonoBehaviour
 
     private void OnUp(InputValue input)
     {
-        if (isAttack) return;
-        isAttack = true;
-        _attackStartTime = Time.time;
 
         if (gameTurn != attackTurn || !input.isPressed)
             return;
@@ -51,9 +48,6 @@ public class InputControl : MonoBehaviour
 
     private void OnDown(InputValue input)
     {
-        if (isAttack) return;
-        isAttack = true;
-        _attackStartTime = Time.time;
 
         if (gameTurn != attackTurn || !input.isPressed)
             return;
@@ -64,10 +58,6 @@ public class InputControl : MonoBehaviour
     private void OnLeft(InputValue input)
     {
 
-        if (isAttack) return;
-        isAttack = true;
-        _attackStartTime = Time.time;
-
         if (gameTurn != attackTurn || !input.isPressed)
             return;
         
@@ -76,10 +66,6 @@ public class InputControl : MonoBehaviour
     
     private void OnRight(InputValue input)
     {
-
-        if (isAttack) return;
-        isAttack = true;
-        _attackStartTime = Time.time;
 
         if (gameTurn != attackTurn || !input.isPressed)
             return;
@@ -108,6 +94,9 @@ public class InputControl : MonoBehaviour
     }
     public void CreateBeat(int beatIndex)
     {
+        if (isAttack) return;
+        isAttack = true;
+        _attackStartTime = Time.time;
         GameObject attchEmptyBeat = JudgeHitTime();
         if (attchEmptyBeat != null)
         {
